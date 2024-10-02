@@ -58,10 +58,11 @@ function addMatrices() {
   const colsB = parseInt(document.getElementById('colsB').value);
   const matrixB = getMatrixData('matrixB', rowsB, colsB);
 
-  if (rowsA !== rowsB || colsA != colsB) {
+  if (rowsA !== rowsB || colsA !== colsB) {
     alert(
-      'Para somar Matrizes elas precisam ter o mesmo número de COLUNAS e LINHAS entre si!'
+      'Para SOMAR Matrizes elas precisam ter o mesmo número de COLUNAS e LINHAS entre si!'
     );
+    return;
   }
 
   const result = [];
@@ -78,18 +79,32 @@ function addMatrices() {
 
 // Matrix multiplication
 function multiplyMatrices() {
-  const rows = parseInt(document.getElementById('rows').value);
-  const cols = parseInt(document.getElementById('cols').value);
+  // Getting Matrix A
+  const rowsA = parseInt(document.getElementById('rowsA').value);
+  const colsA = parseInt(document.getElementById('colsA').value);
+  //const rowsAbug = parseInt(document.getElementById(''));
+  const matrixA = getMatrixData('matrixA', rowsA, colsA);
 
-  const matrixA = getMatrixData('matrixA', rows, cols);
-  const matrixB = getMatrixData('matrixB', rows, cols);
+  // Getting Matrix B
+  const rowsB = parseInt(document.getElementById('rowsB').value);
+  const colsB = parseInt(document.getElementById('colsB').value);
+  const matrixB = getMatrixData('matrixB', rowsB, colsB);
+
+  if (colsA !== rowsB) {
+    alert(
+      'Para multiplicar matrizes é preciso que: ' +
+        'o número de COLUNAS do primeiro termo (A) ' +
+        'seja igual ao número de LINHAS do segundo termo (B).'
+    );
+    return;
+  }
 
   const result = [];
-  for (let i = 0; i < rows; i++) {
+  for (let i = 0; i < rowsA; i++) {
     const row = [];
-    for (let j = 0; j < cols; j++) {
+    for (let j = 0; j < colsB; j++) {
       let sum = 0;
-      for (let k = 0; k < cols; k++) {
+      for (let k = 0; k < colsA; k++) {
         sum += matrixA[i][k] * matrixB[k][j];
       }
       row.push(sum);

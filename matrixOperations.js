@@ -33,7 +33,13 @@ function createMatrixInputs(matrixId, rows, cols) {
 }
 
 // Function to get matrix data from input fields
-function getMatrixData(matrixId, rows, cols) {
+function getMatrixData(matrixId) {
+  const divTable = document.getElementById(matrixId);
+
+  const table = divTable.children[0];
+  const rows = table.rows.length;
+  const cols = table.rows[0].cells.length;
+
   const matrix = [];
   for (let i = 0; i < rows; i++) {
     const row = [];
@@ -50,13 +56,13 @@ function getMatrixData(matrixId, rows, cols) {
 
 // Matrix addition
 function addMatrices() {
-  const rowsA = parseInt(document.getElementById('rowsA').value);
-  const colsA = parseInt(document.getElementById('colsA').value);
-  const matrixA = getMatrixData('matrixA', rowsA, colsA);
+  const matrixA = getMatrixData('matrixA');
+  const rowsA = parseInt(matrixA.length);
+  const colsA = parseInt(matrixA[0].length);
 
-  const rowsB = parseInt(document.getElementById('rowsB').value);
-  const colsB = parseInt(document.getElementById('colsB').value);
-  const matrixB = getMatrixData('matrixB', rowsB, colsB);
+  const matrixB = getMatrixData('matrixB');
+  const rowsB = parseInt(matrixB.length);
+  const colsB = parseInt(matrixB[0].length);
 
   if (rowsA !== rowsB || colsA !== colsB) {
     alert(
@@ -80,15 +86,14 @@ function addMatrices() {
 // Matrix multiplication
 function multiplyMatrices() {
   // Getting Matrix A
-  const rowsA = parseInt(document.getElementById('rowsA').value);
-  const colsA = parseInt(document.getElementById('colsA').value);
-  //const rowsAbug = parseInt(document.getElementById(''));
-  const matrixA = getMatrixData('matrixA', rowsA, colsA);
+  const matrixA = getMatrixData('matrixA');
+  const rowsA = parseInt(matrixA.length);
+  const colsA = parseInt(matrixA[0].length);
 
   // Getting Matrix B
-  const rowsB = parseInt(document.getElementById('rowsB').value);
-  const colsB = parseInt(document.getElementById('colsB').value);
-  const matrixB = getMatrixData('matrixB', rowsB, colsB);
+  const matrixB = getMatrixData('matrixB');
+  const rowsB = parseInt(matrixB.length);
+  const colsB = parseInt(matrixB[0].length);
 
   if (colsA !== rowsB) {
     alert(
